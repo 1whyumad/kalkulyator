@@ -1,0 +1,62 @@
+body {
+    background-color: rgb(171, 171, 171);
+}
+
+.container {
+    text-align: center;
+    font-family: Verdana, sans-serif;
+    color:aliceblue;
+    display:grid;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+     
+}
+
+.bordered {
+    width: 100px ;
+    height: 50px;
+    border-radius: 10%;
+    border-right: 2px ;
+    border-left: 2px ;
+    border-top: 2px ;
+    border-bottom: 2px ;
+    cursor: pointer;
+}
+
+.simple_button {
+    background-color: rgb(74, 74, 74)
+}
+
+.func_button {
+    background-color: rgb(176, 58, 115)    
+}
+
+#cancel {
+    background-color: rgb(242, 182, 211) 
+}
+
+#equal {
+    background-color: rgb(242, 182, 211) 
+}
+
+.panel {
+    font-size: 100px;
+}
+
+.field {
+    width: 500px ;
+    height: 50px;
+    border-radius: 10%;
+    border-right: 2px solid;
+    border-left: 2px solid;
+    border-top: 2px solid;
+    border-bottom: 2px solid; 
+    background-color: rgb(74, 74, 74);
+    font-size: 70px;
+    align-items:end;
+    justify-content:end;
+    text-align:end;  
+}
+
