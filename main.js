@@ -1,395 +1,178 @@
 var firstValue = 0;
 var secondValue = 0;
-var result = 0;
+var result = "0";
 
 var func;
 
 var isFirstValue = true;
-var isEnd = false;
 
 const fieldID = "field-text";
 
 document.addEventListener("DOMContentLoaded", () => {
-    changeField(firstValue);
+    outputResult();
   });
 
-function countValue(func, value1, value2) {
+function countValue(func) {
+    outputLogs("countValue(" + func + ")");
+
     if (func == "sum") {
-        result = value1 + value2;       
+        result = firstValue + secondValue;       
     } else if (func == "sub") {
-        result = value1 - value2;
+        result = firstValue - secondValue;
     } else if (func == "div") {
-        result = value1 / value2;
+        if (secondValue == 0) {
+            alert("Так нельзя. *cancel*");
+            onClickCancel();
+            return;
+        }
+        result = firstValue / secondValue;
     } else {
-        result = value1 * value2;
+        result = firstValue * secondValue;
     }
 
-    changeField(result);
-    isFirstValue = true;
-    isEnd = true;
-    firstValue = 0;
+    firstValue = result;
     secondValue = 0;
+
+    result = "" + result;
 }
 
 function onClickSum() {
-    if(isEnd) {
-        countValue(func, result, secondValue)
-    } else if (!isFirstValue) {
-        countValue(func, firstValue, secondValue);    
+    outputLogs("onClickEqual()");
+
+     if (!isFirstValue) {
+        countValue(func);    
     } else {
-        isFirstValue = false;   
+        isFirstValue = false;
+        
     }
 
+    result += " + ";
+
     func = "sum";
+    outputResult();
 }
 
 function onClickEqual() {
+    outputLogs("onClickEqual()");
+
     if (!isFirstValue) {
-        countValue(func, firstValue, secondValue);    
-    } 
+        countValue(func);    
+    }
+    
+    isFirstValue = true;
+
+    outputResult();
 }
 
 function onClickSub() {
-    if(isEnd) {
-        countValue(func, result, secondValue)
-    } else
+    outputLogs("onClickSub()");
+
+    if (!isFirstValue) {
+        countValue(func);    
+    } else {
+        isFirstValue = false;  
+    } 
+
+    result += " - "; 
+
+    func = "sub";
+    outputResult();
+}
+
+function onClickDiv() {
+    outputLogs("onClickDiv()");
+
     if (!isFirstValue) {
         countValue(func);    
     } else {
         isFirstValue = false;   
-    } 
+    }
 
-    func = "sub";
-}
-
-function onClickDiv() {
-    if(isEnd) {
-        countValue(func, result, secondValue)
-    } else if (!isFirstValue) {
-        countValue(func);    
-    } else {
-        isFirstValue = false;   
-    } 
+    result += " / ";
 
     func = "div";
+    outputResult();
 }
 
 function onClickMul() {
-    if(isEnd) {
-        countValue(func, result, secondValue)
-    } else if (!isFirstValue) {
+    outputLogs("onClickMul()");
+
+    if (!isFirstValue) {
         countValue(func);    
     }  else {
-        isFirstValue = false;   
+        isFirstValue = false;  
     }
 
+    result += " * "; 
+
     func = "mul";
+    outputResult();
 }
 
+function onClickCancel() {
+    outputLogs("onClickCancel()");
+
+    firstValue = 0;
+    secondValue = 0;
+    result = 0;
+    isFirstValue = true;
+
+    outputResult();
+}
+
+function outputResult() {
+    outputLogs("outputResult()");
+
+    document.getElementById(fieldID).textContent = result;
+    
+}
+
+// deprecated
 function changeField(value) {
     document.getElementById(fieldID).textContent = value;
 }
 
-
-function addZero() {
-
-    isEnd = false;
+function addNumber(number) {
+    outputLogs("addNumber(" + number + ")");
 
     if(isFirstValue) {
 
         if (firstValue == 0) {
-            str = "" + 0;
+            str = "" + number;
         } else {
-            str = "" + firstValue + 0;
+            str = "" + firstValue + number;
         }
 
         firstValue = parseInt(str);
 
-        changeField(firstValue)
-
     } else {
 
         if (secondValue == 0) {
-            str = "" + 0;
+            str = "" + number;
         } else {
-            str = "" + secondValue + 0;
+            str = "" + secondValue + number;
         }
 
         secondValue = parseInt(str);
 
-        changeField(secondValue)
+    } 
+    
+    if (result == "0") {
+        result = "" + number;    
+    } else {
+        result = "" + result + number;
+    }    
 
-    }
+    outputResult();
 }
 
-function addOne() {
-    isEnd = false;
-
-    if(isFirstValue) {
-
-        if (firstValue == 0) {
-            str = "" + 1;
-        } else {
-            str = "" + firstValue + 1;
-        }
-
-        firstValue = parseInt(str);
-
-        changeField(firstValue)
-
-    } else {
-
-        if (secondValue == 0) {
-            str = "" + 1;
-        } else {
-            str = "" + secondValue + 1;
-        }
-
-        secondValue = parseInt(str);
-
-        changeField(secondValue)
-
-    }
-}
-
-function addTwo() {
-    isEnd = false;
-
-    if(isFirstValue) {
-
-        if (firstValue == 0) {
-            str = "" + 2;
-        } else {
-            str = "" + firstValue + 2;
-        }
-
-        firstValue = parseInt(str);
-
-        changeField(firstValue)
-
-    } else {
-
-        if (secondValue == 0) {
-            str = "" + 2;
-        } else {
-            str = "" + secondValue + 2;
-        }
-
-        secondValue = parseInt(str);
-
-        changeField(secondValue)
-
-    }
-}
-
-function addThree() {
-    isEnd = false;
-
-    if(isFirstValue) {
-
-        if (firstValue == 0) {
-            str = "" + 3;
-        } else {
-            str = "" + firstValue + 3;
-        }
-
-        firstValue = parseInt(str);
-
-        changeField(firstValue)
-
-    } else {
-
-        if (secondValue == 0) {
-            str = "" + 3;
-        } else {
-            str = "" + secondValue + 3;
-        }
-
-        secondValue = parseInt(str);
-
-        changeField(secondValue)
-
-    }
-}
-
-function addFour() {
-
-    isEnd = false;
-
-    if(isFirstValue) {
-
-        if (firstValue == 0) {
-            str = "" + 4;
-        } else {
-            str = "" + firstValue + 4;
-        }
-
-        firstValue = parseInt(str);
-
-        changeField(firstValue)
-
-    } else {
-
-        if (secondValue == 0) {
-            str = "" + 4;
-        } else {
-            str = "" + secondValue + 4;
-        }
-
-        secondValue = parseInt(str);
-
-        changeField(secondValue)
-
-    }
-}
-
-
-function addFive() {
-    isEnd = false;
-
-    if(isFirstValue) {
-
-        if (firstValue == 0) {
-            str = "" + 5;
-        } else {
-            str = "" + firstValue + 5;
-        }
-
-        firstValue = parseInt(str);
-
-        changeField(firstValue)
-
-    } else {
-
-        if (secondValue == 0) {
-            str = "" + 5;
-        } else {
-            str = "" + secondValue + 5;
-        }
-
-        secondValue = parseInt(str);
-
-        changeField(secondValue)
-
-    }
-}
-
-function addSix() {
-    isEnd = false;
-
-    if(isFirstValue) {
-
-        if (firstValue == 0) {
-            str = "" + 6;
-        } else {
-            str = "" + firstValue + 6;
-        }
-
-        firstValue = parseInt(str);
-
-        changeField(firstValue)
-
-    } else {
-
-        if (secondValue == 0) {
-            str = "" + 6;
-        } else {
-            str = "" + secondValue + 6;
-        }
-
-        secondValue = parseInt(str);
-
-        changeField(secondValue)
-
-    }
-}
-
-function addSeven() {
-    isEnd = false;
-
-    if(isFirstValue) {
-
-        if (firstValue == 0) {
-            str = "" + 7;
-        } else {
-            str = "" + firstValue + 7;
-        }
-
-        firstValue = parseInt(str);
-
-        changeField(firstValue)
-
-    } else {
-
-        if (secondValue == 0) {
-            str = "" + 7;
-        } else {
-            str = "" + secondValue + 7;
-        }
-
-        secondValue = parseInt(str);
-
-        changeField(secondValue)
-
-    }
-}
-
-function addEight() {
-    isEnd = false;
-
-    if(isFirstValue) {
-
-        if (firstValue == 0) {
-            str = "" + 8;
-        } else {
-            str = "" + firstValue + 8;
-        }
-
-        firstValue = parseInt(str);
-
-        changeField(firstValue)
-
-    } else {
-
-        if (secondValue == 0) {
-            str = "" + 8;
-        } else {
-            str = "" + secondValue + 8;
-        }
-
-        secondValue = parseInt(str);
-
-        changeField(secondValue)
-
-    }
-}
-
-function addNine() {
-    isEnd = false;
-
-    if(isFirstValue) {
-
-        if (firstValue == 0) {
-            str = "" + 9;
-        } else {
-            str = "" + firstValue + 9;
-        }
-
-        firstValue = parseInt(str);
-
-        changeField(firstValue)
-
-    } else {
-
-        if (secondValue == 0) {
-            str = "" + 9;
-        } else {
-            str = "" + secondValue + 9;
-        }
-
-        secondValue = parseInt(str);
-
-        changeField(secondValue)
-
-    }
+function outputLogs(functionName) {
+    console.log(functionName);
+    console.log(firstValue + ", type: " + typeof(firstValue));
+    console.log(secondValue + ", type: " + typeof(secondValue));
+    console.log(result + ", type: " + typeof(result));
+    console.log(isFirstValue + ", type: " + typeof(isFirstValue));
+    //console.log(isResult + ", type: " + typeof(isResult));
+    console.log(func + ", type: " + typeof(func));
+    console.log("==============================================");    
 }

@@ -29,16 +29,48 @@ body {
     background-color: rgb(74, 74, 74)
 }
 
+.simple_button:hover {
+    background-color: rgb(130, 130, 130)
+}
+
+.simple_button:active {
+    background-color: rgb(43, 43, 43)
+}
+
 .func_button {
     background-color: rgb(176, 58, 115)    
 }
 
+.func_button:hover {
+    background-color: rgb(209, 77, 141)    
+}
+
+.func_button:active {
+    background-color: rgb(145, 45, 94)    
+}
+
 #cancel {
-    background-color: rgb(242, 182, 211) 
+    background-color: rgb(242, 182, 211)
+}
+
+#cancel:hover {
+    background-color: rgb(242, 194, 217)
+}
+
+#cancel:active {
+    background-color: rgb(214, 139, 175)
 }
 
 #equal {
     background-color: rgb(242, 182, 211) 
+}
+
+#equal:hover {
+    background-color: rgb(242, 194, 217)
+}
+
+#equal:active {
+    background-color: rgb(214, 139, 175)
 }
 
 .panel {
